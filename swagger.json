@@ -1,0 +1,415 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "description": "UberSystem",
+        "title": "API's for Uber like System"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "admin",
+            "description": "API's for admin"
+        },
+        {
+            "name": "driver",
+            "description": "API's for driver"
+        },
+        {
+            "name": "customer",
+            "description": "API's for customer"
+        },
+        {
+            "name": "booking",
+            "description": "API for booking"
+        }
+    ],
+    "paths": {
+        "/adminLogin": {
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "admin",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "login sucessful"
+                    }
+                }
+            }
+        },
+        "/getcustomer": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "getallcustomer",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/getdriver": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "getallcustomer",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/freecustomer": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "getallcustomer",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/freedriver": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "getallcustomer",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/confirmbooking": {
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "confirmbooking",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "access_token",
+                        "name": "access_token",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "booking created"
+                    }
+                }
+            }
+        },
+        "/allbookingdetails": {
+            "get": {
+                "tags": [
+                    "admin"
+                ],
+                "description": "getallcustomer",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/driverSignup": {
+            "post": {
+                "tags": [
+                    "driver"
+                ],
+                "description": "driver",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "phone_no",
+                        "name": "phone_no",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "carnumber",
+                        "name": "carnumber",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "carname",
+                        "name": "carname",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sign sucessful"
+                    }
+                }
+            }
+        },
+        "/driverLogin": {
+            "post": {
+                "tags": [
+                    "driver"
+                ],
+                "description": "driver",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "login sucessful"
+                    }
+                }
+            }
+        },
+        "/bookingComplete": {
+            "post": {
+                "tags": [
+                    "driver"
+                ],
+                "description": "completebooking",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "access_token",
+                        "name": "access_token",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "booking Complete"
+                    }
+                }
+            }
+        },
+        "/customerSignup": {
+            "post": {
+                "tags": [
+                    "customer"
+                ],
+                "description": "customer sign form",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "phone_no",
+                        "name": "phone_no",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sign sucessful"
+                    }
+                }
+            }
+        },
+        "/customerLogin": {
+            "post": {
+                "tags": [
+                    "customer"
+                ],
+                "description": "customer login",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "login sucessful"
+                    }
+                }
+            }
+        },
+        "/booking": {
+            "post": {
+                "tags": [
+                    "booking"
+                ],
+                "description": "get all bookings",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "access_token",
+                        "name": "access_token",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "tolat",
+                        "name": "tolat",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "tolon",
+                        "name": "tolon",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "fromlat",
+                        "name": "fromlat",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "fromlon",
+                        "name": "fromlon",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "booking cretaed"
+                    }
+                }
+            }
+        },
+        "/rating": {
+            "post": {
+                "tags": [
+                    "booking"
+                ],
+                "description": "rating",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "access_tokan",
+                        "name": "access_tokan",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "rating",
+                        "name": "rating",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "feedback",
+                        "name": "feedback",
+                        "in": "formData",
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "rating done"
+                    }
+                }
+            }
+        }
+    }
+}
