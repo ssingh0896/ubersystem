@@ -20,10 +20,11 @@ exports.getAllCustomer = (req, res) => {
 
 exports.getAllDrivers = (req, res) => {
    promise.coroutine(function* () {
-      //const query = 'SELECT name FROM driver';
-      const query = 'SELECT *,round(avg(rating.rating)) FROM driver INNER JOIN rating on driver.id=rating.driver_id '
+     
 
+      let query=`SELECT name, avg_rating FROM driver`
       var result = yield dbHandler.dbHandlerPromise(query)
+
       res.send(result)
    })()
 }
@@ -48,28 +49,28 @@ exports.getfreeCustomer = (req, res) => {
 
 // Admin assign driver to customer
 
-exports.assignBooking = () => {
+exports.assignBooking = (customerid,driverid) => {
    return new Promise((resolve, reject) => {
       promise.coroutine(function* () {
-         const query1 = "SELECT id from driver WHERE status=0 LIMIT 1";
-         const driverid = yield dbHandler.dbHandlerPromise(query1);
+         // const query1 = "SELECT id from driver WHERE status=0 LIMIT 1";
+         // const driverid = yield dbHandler.dbHandlerPromise(query1);
 
-         const query2 = "SELECT bookingid from booking WHERE bookingstatus=0 LIMIT 1";
-         const bookingid = yield dbHandler.dbHandlerPromise(query2);
+         // const query2 = "SELECT bookingid from booking WHERE bookingstatus=0 LIMIT 1";
+         // const bookingid = yield dbHandler.dbHandlerPromise(query2);
 
-         if (!driverid.length || !bookingid.length) {
-            reject({
-               "Message": "driver is unavailabe or not booking yet",
-               "Status Code": "404"
-            })
-         } else {
+         // if (!driverid.length || !bookingid.length) {
+         //    reject({
+         //       "Message": "driver is unavailabe or not booking yet",
+         //       "Status Code": "404"
+         //    })
+         
 
-            const query = `UPDATE booking b, driver d SET b.bookingstatus=1, b.driverid=${driverid[0].id},d.status=1 WHERE d.id=${driverid[0].id} AND b.bookingid=${bookingid[0].bookingid} AND d.status=0`;
-            //const query = `UPDATE booking b,driver d SET b.bookingstatus=1, b.driverid=${driverid} ,d.status=1 WHERE d.id=${driverid} AND b.customerid=${customerid}`; 
+            //const query = `UPDATE booking b, driver d SET b.bookingstatus=1, b.driverid=${driverid[0].id},d.status=1 WHERE d.id=${driverid[0].id} AND b.bookingid=${bookingid[0].bookingid} AND d.status=0`;
+            const query = `UPDATE booking b,driver d SET b.bookingstatus=1, b.driverid=${driverid} ,d.status=1 WHERE d.id=${driverid} AND b.customerid=${customerid}`; 
             let result = yield dbHandler.dbHandlerPromise(query)
             resolve(result)
-            mongoHandler.logData(driverid, bookingid);
-         }
+            //mongoHandler.logData(driverid, bookingid);
+      
       })()
    })
 }

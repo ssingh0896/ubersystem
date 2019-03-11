@@ -21,10 +21,10 @@ exports.assignBooking=(req, res)=>
         catch (error) {
             return response.sendError(res, constants.responseMessage.INVALID_ACCESS_TOKEN);
         }
-        // var customerid= req.body.customerid;
-        // var driverid= req.body.driverid;
+        let customerid= req.body.customerid;
+        let driverid= req.body.driverid;
         
-         yield adminservices.assignBooking();
+         yield adminservices.assignBooking(customerid,driverid);
          return response.actionCompleteResponse(res, constants.responseMessage.DRIVER_ASSINGED)
     })().catch(err=>res.send(err))
 }

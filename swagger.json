@@ -123,6 +123,20 @@
                         "name": "access_token",
                         "in": "formData",
                         "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "customerid",
+                        "name": "customerid",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "driverid",
+                        "name": "driverid",
+                        "in": "formData",
+                        "example": ""
                     }
                 ],
                 "responses": {

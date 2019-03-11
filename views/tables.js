@@ -28,7 +28,6 @@ async function fetchData(req,res){
     let templates=handlebars.compile(source);
     var result=templates(datas);
     fs.writeFileSync("./views/table.hbs",result,"utf8");
-    console.log(result);
     }
     catch(err){
         console.log(err);
