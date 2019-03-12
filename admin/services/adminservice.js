@@ -52,25 +52,19 @@ exports.getfreeCustomer = (req, res) => {
 exports.assignBooking = (customerid,driverid) => {
    return new Promise((resolve, reject) => {
       promise.coroutine(function* () {
-         // const query1 = "SELECT id from driver WHERE status=0 LIMIT 1";
-         // const driverid = yield dbHandler.dbHandlerPromise(query1);
 
-         // const query2 = "SELECT bookingid from booking WHERE bookingstatus=0 LIMIT 1";
-         // const bookingid = yield dbHandler.dbHandlerPromise(query2);
-
-         // if (!driverid.length || !bookingid.length) {
-         //    reject({
-         //       "Message": "driver is unavailabe or not booking yet",
-         //       "Status Code": "404"
-         //    })
-         
-
-            //const query = `UPDATE booking b, driver d SET b.bookingstatus=1, b.driverid=${driverid[0].id},d.status=1 WHERE d.id=${driverid[0].id} AND b.bookingid=${bookingid[0].bookingid} AND d.status=0`;
             const query = `UPDATE booking b,driver d SET b.bookingstatus=1, b.driverid=${driverid} ,d.status=1 WHERE d.id=${driverid} AND b.customerid=${customerid}`; 
             let result = yield dbHandler.dbHandlerPromise(query)
-            resolve(result)
+            const query1 = `SELECT bookingid FROM booking WHERE driverid=${driverid} AND bookingstatus=1`; 
+            let id = yield dbHandler.dbHandlerPromise(query1)
+            console.log(id)
+            if(result.changedRows==0)
+            reject({
+               "msg":"error during driver assinging"
+            })
+            else
+            resolve(id);
             //mongoHandler.logData(driverid, bookingid);
-      
       })()
    })
 }
@@ -79,7 +73,7 @@ exports.assignBooking = (customerid,driverid) => {
 exports.getAllBookingDetails = () => {
    return new Promise((resolve, reject) => {
       promise.coroutine(function* () {
-         const query = "SELECT booking.bookingid,booking.customerid,booking.driverid,booking.bookingstatus,booking.tolat,booking.fromlat,booking.tolon,booking.fromlon,customer.name,driver.name,driver.carnumber, driver.carname FROM booking,customer,driver WHERE booking.customerid=customer.id AND booking.driverid=driver.id";
+         const query = "SELECT booking.bookingid,booking.customerid,booking.driverid,booking.bookingstatus,booking.from_latitude,booking.from_longitude,booking.to_latitude,booking.to_longitude,customer.name,driver.name,driver.carnumber, driver.carname FROM booking,customer,driver WHERE booking.customerid=customer.id AND booking.driverid=driver.id";
          let result = yield dbHandler.dbHandlerPromise(query);
          resolve(result)
       })()

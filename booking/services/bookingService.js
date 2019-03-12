@@ -21,7 +21,7 @@ exports.userDetail = (opts) => {
 exports.insertBookingDetail = (opts) => {
     return new Promise((resolve, reject) => {
         promise.coroutine(function* () {
-            const query = 'INSERT INTO booking(customerid,bookingstatus,tolat,tolon,fromlat,fromlon) VALUES(?,?,?,?,?,?)';
+            const query = 'INSERT INTO booking(customerid,bookingstatus,from_latitude,from_longitude,to_latitude,to_longitude) VALUES(?,?,?,?,?,?)';
             let result = yield dbHandler.dbHandlerPromise(query, opts)
             resolve(result)
         })();
@@ -44,7 +44,7 @@ exports.ratings=(opts)=>
     {
     promise.coroutine(function *()
     {
-        const query='UPDATE booking, SET rating=? , feedback =? WHERE customerid= ? AND  bookingstatus=1'
+        const query='UPDATE booking, SET rating=? , feedback =? WHERE customerid= ? AND  bookingstatus=2'
         let result = yield dbHandler.dbHandlerPromise(query,opts)
         resolve(result); 
     })()
@@ -62,3 +62,4 @@ exports.customerDetails = (tokan)=>
     })()
 })
 }
+

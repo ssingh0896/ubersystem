@@ -24,8 +24,14 @@ exports.assignBooking=(req, res)=>
         let customerid= req.body.customerid;
         let driverid= req.body.driverid;
         
-         yield adminservices.assignBooking(customerid,driverid);
-         return response.actionCompleteResponse(res, constants.responseMessage.DRIVER_ASSINGED)
+         let result = yield adminservices.assignBooking(customerid,driverid);
+         
+         res.send({
+             "Message":"DriverAssinged",
+             "Status":"200",
+             "Data":"your booking id "+result[0].bookingid
+         })
+         //return response.actionCompleteResponse(res, constants.responseMessage.DRIVER_ASSINGED)
     })().catch(err=>res.send(err))
 }
 
