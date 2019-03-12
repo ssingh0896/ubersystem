@@ -85,3 +85,20 @@ exports.getAllBookingDetails = () => {
       })()
    })
 }
+exports.getNearDriver=()=>
+{
+   return new Promise((resolve,reject)=>
+   {
+      const query=`SELECT d.id,d.name, 
+      111.111 * 
+      DEGREES(ACOS(LEAST(COS(RADIANS(d.latitude)) 
+      * COS(RADIANS(b.to_latitude)) 
+      * COS(RADIANS(d.Longitude - b.to_longitude)) 
+      + SIN(RADIANS(d.latitude)) 
+      * SIN(RADIANS(b.to_latitude)), 1.0))) AS distance_in_km 
+      FROM driver AS d 
+      JOIN booking AS b ON d.id = b.driverid`;
+      let result= dbHandler.dbHandlerPromise(query);
+      resolve(result);
+   })
+}

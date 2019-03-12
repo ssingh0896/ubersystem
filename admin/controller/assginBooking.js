@@ -38,3 +38,11 @@ exports.getAllBookingDetails=(req,res)=>
        res.send(result);
     })()
 }
+
+exports.getNearDrivers=(req,res)=>
+{
+    promise.coroutine(function *(){
+        let result=yield adminservices.getNearDriver();
+        res.send(result)
+    })()
+}
