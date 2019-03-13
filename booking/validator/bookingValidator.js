@@ -20,6 +20,8 @@ exports.validation= (req,res,next)=>
 exports.rating = (req,res,next)=>
 {
   const schema=Joi.object().keys({
+    access_tokan:Joi.string().required(),
+    booking_id:Joi.number().required(),
     rating:Joi.number().required(),
     feedback: Joi.string()
   })

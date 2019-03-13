@@ -62,10 +62,12 @@ exports.rating=(req,res)=>
     promise.coroutine(function* ()
     {
         let opts=[]
-        let rating= req.body.rating;
         let tokan= req.body.access_tokan;
+        let booking_id=req.body.booking_id;
+        let rating= req.body.rating;
+        let feedback=req.body.feedback;
         let customerid= yield bookingService.customerDetails(tokan)
-        
+        console.log(customerid)
         if(rating>5)
         {
             res.send(
@@ -75,9 +77,12 @@ exports.rating=(req,res)=>
                 }
             )
         }
-        opts.push(rating, req.body.feedback,customerid);
-        
-        yield bookingService.ratings(opts);
+        opts.push(rating,feedback,booking_id,customerid);
+
+        yield bookingService.ratings(opts)
+        yield bookingService.avgRatingUpdate(booking_id,rating)
+
+
         res.send({
             "Message":"Thank you for your ratings",
             "status":"200"

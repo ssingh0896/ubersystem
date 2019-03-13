@@ -405,6 +405,13 @@
                     },
                     {
                         "type": "string",
+                        "description": "booking_id",
+                        "name": "booking_id",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
                         "description": "rating",
                         "name": "rating",
                         "in": "formData",

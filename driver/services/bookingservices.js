@@ -9,7 +9,7 @@ exports.bookingComplete = (driverid)=>
             let query2=`SELECT no_of_trips FROM driver`;
             let trips=yield dbHandler.dbHandlerPromise(query2)
             let totaltrips =trips[0].no_of_trips+1;
-            let query=`UPDATE driver d,booking b SET d.status=0,b.bookingstatus=2,d.total_rating=${totalrating},d.no_of_trips=${totaltrips},d.avg_rating=${avg_rating} where d.id=${driverid} AND b.driverid=${driverid} AND d.status=1`;
+            let query=`UPDATE driver d,booking b SET d.status=0,b.bookingstatus=2,d.no_of_trips=${totaltrips} where d.id=${driverid} AND b.driverid=${driverid} AND d.status=1`;
             let result = yield dbHandler.dbHandlerPromise(query)
             if(result.affectedRows==0)
             reject({
