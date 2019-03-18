@@ -22,7 +22,7 @@ exports.userDetail = (opts) => {
 exports.insertBookingDetail = (opts) => {
     return new Promise((resolve, reject) => {
         promise.coroutine(function* () {
-            const query = 'INSERT INTO booking(customerid,bookingstatus,from_latitude,from_longitude,to_latitude,to_longitude) VALUES(?,?,?,?,?,?)';
+            const query = 'INSERT INTO booking(customerid,from_latitude,from_longitude,to_latitude,to_longitude) VALUES(?,?,?,?,?)';
             let result = yield dbHandler.dbHandlerPromise(query, opts)
             resolve(result)
         })();
@@ -62,7 +62,6 @@ exports.avgRatingUpdate = (booking_id,ratings) => {
         const query2 = `SELECT no_of_trips, avg_rating FROM driver WHERE id=${id[0].driverid}`
         let rating = await dbHandler.dbHandlerPromise(query2)
         const avgrating = (((rating[0].no_of_trips - 1) * rating[0].avg_rating)+ ratings) / rating[0].no_of_trips;
-        //console.log(avgrating)
         const query = `UPDATE driver SET ava_rating=${avgrating} WHERE id=${id[0].driverid}`
         let result = await dbHandler.dbHandlerPromise(query)
         console.log(result)

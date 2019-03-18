@@ -16,6 +16,8 @@ exports.signup = async (req, res) => {
                 opts.push(createToken(req.body.email));
                 opts.push(req.body.carnumber);
                 opts.push(req.body.carname)
+                opts.push(req.body.latitude)
+                opts.push(req.body.longitude)
                 var emailMessage=yield emailExist(req.body.email);
                 if (!emailMessage) {
                         return response.sendError(res, constants.responseMessage.EMAIL_EXIST);

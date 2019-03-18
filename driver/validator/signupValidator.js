@@ -12,7 +12,9 @@ exports.validation= (req,res,next)=>
         password:Joi.string().required(),
         phone_no:Joi.string().required(),
         carnumber:Joi.string().required(),
-        carname:Joi.string().required()
+        carname:Joi.string().required(),
+        latitude:Joi.number().required(),
+        longitude:Joi.number().required()
     })
     var result=validation.validate(res,req.body,schema);
     if(result==true)
