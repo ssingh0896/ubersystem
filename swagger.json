@@ -207,6 +207,20 @@
                         "name": "carname",
                         "in": "formData",
                         "example": ""
+                    },
+                    {
+                        "type": "number",
+                        "description": "latitude",
+                        "name": "latitude",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "number",
+                        "description": "longitude",
+                        "name": "longitude",
+                        "in": "formData",
+                        "example": ""
                     }
                 ],
                 "responses": {
@@ -355,20 +369,6 @@
                     },
                     {
                         "type": "string",
-                        "description": "tolat",
-                        "name": "tolat",
-                        "in": "formData",
-                        "example": ""
-                    },
-                    {
-                        "type": "string",
-                        "description": "tolon",
-                        "name": "tolon",
-                        "in": "formData",
-                        "example": ""
-                    },
-                    {
-                        "type": "string",
                         "description": "fromlat",
                         "name": "fromlat",
                         "in": "formData",
@@ -378,6 +378,20 @@
                         "type": "string",
                         "description": "fromlon",
                         "name": "fromlon",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "tolat",
+                        "name": "tolat",
+                        "in": "formData",
+                        "example": ""
+                    },
+                    {
+                        "type": "string",
+                        "description": "tolon",
+                        "name": "tolon",
                         "in": "formData",
                         "example": ""
                     }

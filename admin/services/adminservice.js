@@ -62,7 +62,7 @@ exports.assignBooking = (customerid,driverid) => {
             let result = yield dbHandler.dbHandlerPromise(query)
             const query1 = `SELECT bookingid FROM booking WHERE driverid=${driverid} AND bookingstatus=1`; 
             let id = yield dbHandler.dbHandlerPromise(query1)
-            console.log(id)
+            
             if(result.changedRows==0)
             reject({
                "msg":"error during driver assinging"

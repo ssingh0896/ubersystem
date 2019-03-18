@@ -6,10 +6,10 @@ exports.validation= (req,res,next)=>
 {
     const schema= Joi.object().keys({
         access_token: Joi.string().required(),
-        tolat:Joi.number().required(),
-        tolon:Joi.number().required(),
         fromlat:Joi.number().required(),
-        fromlon:Joi.number().required()
+        fromlon:Joi.number().required(),
+        tolat:Joi.number().required(),
+        tolon:Joi.number().required()
     })
     var result=validation.validate(res,req.body,schema);
     if(result==true)

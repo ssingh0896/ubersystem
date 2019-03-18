@@ -4,7 +4,7 @@ const promise = require('bluebird');
 exports.signupService = (opts) => {
     return new promise((resolve, reject) => {
         promise.coroutine(function* () {
-            const query = 'INSERT INTO driver(name,email,password,phone_no,access_token,carnumber,carname) VALUES(?,?,?,?,?,?,?)';
+            const query = 'INSERT INTO driver(name,email,password,phone_no,access_token,carnumber,carname,latitude,longitude) VALUES(?,?,?,?,?,?,?,?,?)';
             var result = yield dbHandler.dbHandlerPromise(query, opts)
             resolve(result)
         })();

@@ -21,12 +21,11 @@ exports.booking = (req, res) => {
         }
         let userDetail = yield bookingService.userDetail(access_token);
         opts.push(userDetail[0].id)
-        opts.push("PENDING");
         opts.push(req.body.tolat);
         opts.push(req.body.tolon);
         opts.push(req.body.fromlat);
         opts.push(req.body.fromlon);
-        if(checkBookingHistory)
+        if(!checkBookingHistory)
         {
             res.send({
                 "Message":"Not Allow to Book Ride",
