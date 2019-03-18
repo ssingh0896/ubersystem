@@ -8,16 +8,19 @@ const mongoHandler = require("../../services/mongoHandler")
 
 
 exports.getAllCustomer = (req, res) => {
-
    promise.coroutine(function* () {
-      const query = 'SELECT name FROM customer';
-      var result = yield dbHandler.dbHandlerPromise(query)
-      res.send(result)
+      const query = 'SELECT * FROM customer';
+      let result = yield dbHandler.dbHandlerPromise(query)
+      res.send(result[0].name)
 
-   })
-      ()
+   })()
 }
 
+exports.getNumber= (customerid)=>{
+  query=`SELECT phone_no FROM customer WHERE id=${customerid}`
+   let result=dbHandler.dbHandlerPromise(query)
+   return result;
+}
 exports.getAllDrivers = (req, res) => {
    promise.coroutine(function* () {
      
@@ -29,6 +32,7 @@ exports.getAllDrivers = (req, res) => {
    })()
 }
 
+
 // Get those driver Whose status = 0 
 exports.getfreeDriver = (req, res) => {
    promise.coroutine(function* () {
@@ -37,6 +41,7 @@ exports.getfreeDriver = (req, res) => {
       res.send(result)
    })()
 }
+
 
 // Get those customer Whose bookingstatus = 0 
 exports.getfreeCustomer = (req, res) => {
@@ -47,8 +52,8 @@ exports.getfreeCustomer = (req, res) => {
    })()
 }
 
-// Admin assign driver to customer
 
+// Admin assign driver to customer
 exports.assignBooking = (customerid,driverid) => {
    return new Promise((resolve, reject) => {
       promise.coroutine(function* () {
@@ -66,6 +71,22 @@ exports.assignBooking = (customerid,driverid) => {
             resolve(id);
             //mongoHandler.logData(driverid, bookingid);
       })()
+   })
+}
+
+exports.sendOtp=(no)=>
+{
+    let code=otp.generate(4, { digits:true,alphabate:false,upperCase: false, specialChars: false });
+   
+    const accountSid = 'AC7c62f9f023b6af8a5f71ba94acdd54ab';
+const authToken = '39486e44e5cb96addefe1c6f8a8674b8';
+const client = require('twilio')(accountSid, authToken);
+
+client.messages
+  .create({
+     body: `Ur otp for booking ${code}`,
+     from: '+19547906415',
+     to: no
    })
 }
 
