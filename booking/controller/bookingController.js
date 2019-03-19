@@ -56,6 +56,7 @@ function checkBookingHistory(id)
         })()
     })
 }
+
 exports.rating=(req,res)=>
 {
     promise.coroutine(function* ()
@@ -88,3 +89,6 @@ exports.rating=(req,res)=>
         })
     })()
 }
+
+
+

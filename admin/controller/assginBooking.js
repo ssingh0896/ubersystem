@@ -3,7 +3,7 @@ const adminservices = require("../services/adminservice")
 const response = require("../../services/response")
 const constants = require("../../properties/constants")
 const promise = require("bluebird")
-const otp = require("otp-generator")
+
 /**
  * @function admin book driver to customer
  * @params {string} access_token
@@ -20,15 +20,21 @@ exports.assignBooking = (req, res) => {
         }
         let customerid = req.body.customerid;
         let driverid = req.body.driverid;
-        let no = yield adminservices.getNumber
-        yield adminservices.assignBooking(customerid, driverid);
-        adminservices.sendOtp(no)
+        
+        //let no = yield adminservices.getNumber(customerid)
+        let no='+919304319196'
+        let result1 = adminservices.sendOtp(no)
+        let result = yield adminservices.assignBooking(customerid, driverid);
         res.send({
             "Message": "DriverAssinged",
             "Status": "200",
             "Data": "your booking id " + result[0].bookingid
         })
-    })().catch(err => res.send(err))
+        
+    })()
+    .catch(err => { 
+        res.send(err)})
+    
 }
 
 
