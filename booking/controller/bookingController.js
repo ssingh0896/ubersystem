@@ -14,7 +14,7 @@ exports.booking = (req, res) => {
         var opts = [];
         var access_token = req.body.access_token;
         try {
-            jwt.verify(access_token, "privateKey");
+          jwt.verify(access_token, "privateKey");
         }
         catch (error) {
             return response.sendError(res, constants.responseMessage.INVALID_ACCESS_TOKEN);
@@ -67,7 +67,7 @@ exports.rating=(req,res)=>
         let rating= req.body.rating;
         let feedback=req.body.feedback;
         let customerid= yield bookingService.customerDetails(tokan)
-        console.log(customerid)
+        
         if(rating>5)
         {
             res.send(
@@ -78,10 +78,9 @@ exports.rating=(req,res)=>
             )
         }
         opts.push(rating,feedback,booking_id,customerid);
-
         yield bookingService.ratings(opts)
-        yield bookingService.avgRatingUpdate(booking_id,rating)
-
+       let result= yield bookingService.avgRatingUpdate(booking_id,rating)
+       console.log(result)
 
         res.send({
             "Message":"Thank you for your ratings",
