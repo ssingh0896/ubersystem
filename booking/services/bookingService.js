@@ -39,11 +39,12 @@ exports.bookingExist = (opts) => {
     })
 }
 exports.ratings = (opts) => {
-    return new Promise (async(resolve, reject) => {
-        const query = `UPDATE booking, SET rating=? , feedback =? WHERE bookingid= ? AND  customerid=?`
-        let result = await dbHandler.dbHandlerPromise(query, opts)
-        //let result = yield dbHandler.dbHandlerPromise(query, opts)
+    return new Promise ((resolve, reject) => {
+        promise.coroutine(function *(){
+        const query = `UPDATE booking SET rating=? , feedback =? WHERE bookingid= ?`
+        let result = yield dbHandler.dbHandlerPromise(query, opts)
         resolve(result);
+    })()
     })
 }
 exports.customerDetails = (tokan) => {
@@ -57,14 +58,15 @@ exports.customerDetails = (tokan) => {
 }
 exports.avgRatingUpdate = (booking_id,ratings) => {
     return new Promise(async (resolve, reject) => {
+        promise.coroutine(function* (){
         const query1 = 'SELECT driverid,rating FROM booking WHERE bookingid=?';
-        let id = await dbHandler.dbHandlerPromise(query1, booking_id);
+        let id = yield dbHandler.dbHandlerPromise(query1, booking_id);
         const query2 = `SELECT no_of_trips, avg_rating FROM driver WHERE id=${id[0].driverid}`
-        let rating = await dbHandler.dbHandlerPromise(query2)
+        let rating = yield dbHandler.dbHandlerPromise(query2)
         const avgrating = (((rating[0].no_of_trips - 1) * rating[0].avg_rating)+ ratings) / rating[0].no_of_trips;
-        const query = `UPDATE driver SET ava_rating=${avgrating} WHERE id=${id[0].driverid}`
-        let result = await dbHandler.dbHandlerPromise(query)
-        console.log(result)
+        const query = `UPDATE driver SET avg_rating=${avgrating} WHERE id=${id[0].driverid}`
+        let result = yield dbHandler.dbHandlerPromise(query)
         resolve(result);
-    })
+    })()
+})
 }

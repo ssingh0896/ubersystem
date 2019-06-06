@@ -32,3 +32,26 @@ exports.driver_id = (opts) => {
         })();
     })
 }
+
+exports.driver_emailid = (id) => {
+    return new Promise((resolve, reject) => {
+        promise.coroutine(function* () {
+            const query = 'SELECT email FROM driver WHERE id=?';
+            let result = yield dbHandler.dbHandlerPromise(query, id)
+            resolve(result)
+        })();
+    })
+}
+
+
+exports.statusUpdate=(email)=>
+{
+    return new Promise ((resolve,reject)=>
+    {
+        promise.coroutine(function* () {
+            const query = 'UPDATE driver SET status=0 WHERE email=?';
+            let result = yield dbHandler.dbHandlerPromise(query,email)
+            resolve(result)
+        })();
+    })
+}

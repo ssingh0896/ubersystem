@@ -49,6 +49,7 @@ exports.getAllBookingDetails = (req, res) => {
 exports.getNearDrivers = (req, res) => {
     promise.coroutine(function* () {
         let result = yield adminservices.getNearDriver();
+        console.log(result)
         res.send(result)
     })()
 }
